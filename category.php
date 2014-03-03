@@ -1,23 +1,34 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title><?php bloginfo("description"); ?></title>
-	<!-- <title>Document</title> -->
-	<!-- <link rel="stylesheet" href="wp-content/themes/boilerplate/style.css"> -->
-	<link rel="stylesheet" href="<?php bloginfo("stylesheet_url"); ?>">
-</head>
+<?php get_header();?>
 <body>
- 
+	<!-- se pone espacio en blanco en the_category para que no salga la viñeta -->
+	<h1><?php the_category(' '); ?></h1>
+ 	<!-- lee la primera entrada que cumple la condicion(have_posts() -->
+ 	<!-- los : significan que abren el if en lugar de la { -->
+ 	<!-- the post recorre las entradas de la categoría seleccionada -->
+ 	<!-- INICIO LOOP -->
 	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-	<!-- post -->
-	<p><?php the_title(); ?></p>
+		<!-- post -->
+		<article>
+			<header>
+				<p>
+					<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+				</p>
+			</header>
+			<!-- <?php the_excerpt(); ?> Extracto de contenido en 20 palabras aprox y elimina todo el formato que hay-->
+			<?php the_time(); ?>
+			<?php the_date(); ?>
+			<?php the_author(); ?>
+			<!-- nos muestra todo a no ser que le metamos un more como este caso -->
+			<?php the_content("Más! "); ?>
+		</article>
 	<?php endwhile; ?>
-	<!-- post navigation -->
+	<!-- FIN LOOP -->
+
+		<!-- post navigation -->
+	
 	<?php else: ?>
-	<!-- no posts found -->
+		<p>NO hay posts</p>
+		<!-- no posts found -->
 	<?php endif; ?>
-
-
 </body>
 </html>
