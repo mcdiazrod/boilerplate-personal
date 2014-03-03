@@ -1,0 +1,1 @@
+<p>Temperatura de 20 grados</p>
